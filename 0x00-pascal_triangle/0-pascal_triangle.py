@@ -1,16 +1,36 @@
 #!/usr/bin/python3
+
 """
-0-main
+ pascal_triangle
 """
-pascal_triangle = __import__('0-pascal_triangle').pascal_triangle
 
-def print_triangle(triangle):
+
+def fact(n):
     """
-    Print the triangle
+    Returns the factorial of n
     """
-    for row in triangle:
-        print("[{}]".format(",".join([str(x) for x in row])))
+    if n < 0:
+        return None  # or raise an exception
+    elif n == 0:
+        return 1
+    else:
+        return n * fact(n - 1)
 
 
-if __name__ == "__main__":
-    print_triangle(pascal_triangle(5))
+def pascal_triangle(n):
+    """
+    Returns a list of integers
+    representing the Pascal Triangle of n
+    returns empty list if n <= 0
+    """
+    if n <= 0:
+        return []
+
+    triangle = []
+
+    for i in range(n):
+        row = []
+        for j in range(i + 1):
+            row.append(fact(i) // (fact(j) * fact(i - j)))
+        triangle.append(row)
+    return triangle
